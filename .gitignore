@@ -1,3 +1,4 @@
 scala/.idea
 *.iml
 spark/.idea
+scala/out
