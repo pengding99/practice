@@ -6,7 +6,7 @@ package org.peng.datascience
 object ParseUtils {
 
   def isHeader(line : String, header : String) : Boolean= {
-    line.trim().startsWith(header);
+    line.trim().contains(header);
   }
 
   def parseLine(line : String , separator : String) : DataRow[String] = {
