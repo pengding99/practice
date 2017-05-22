@@ -1,6 +1,7 @@
 package org.peng.datascience
 
 import org.apache.spark.util.StatCounter
+import java.lang.Double.isNaN
 
 /**
   * Created by Dad on 5/20/2017.
@@ -10,7 +11,7 @@ class NAStatCounter  extends Serializable {
   var missing = 0
 
   def add(x : Double) : NAStatCounter ={
-    if(x == Double.NaN){
+    if(isNaN(x)){
       missing += 1
     }
     else{
@@ -26,5 +27,9 @@ class NAStatCounter  extends Serializable {
   }
 
   override def toString = stats.toString() + " missing " + missing
-  
+
+}
+
+object NAStatCounter extends Serializable {
+  def apply(d : Double) = new NAStatCounter().add(d);
 }

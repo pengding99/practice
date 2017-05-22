@@ -16,4 +16,21 @@ object Test extends App{
   println(solutions.s09(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)))
 
   println(solutions.s09_1(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)))
+
+  println(solutions.s12(List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e))))
+
+  println(solutions.s18(3, 7, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)))
+
+  println(solutions.permutation(List(1,2,3,4)))
+
+  println(solutions.permutation(List(1,2,3, 4), 2).size)
+
+  println(solutions.combination(List(1,2,3, 4), 2))
+
+  println(solutions.fibs.take(10).toList)
+
+  println(solutions.isPrime(199))
+
+  println(solutions.allPrimes.take(10).toList)
+
 }
