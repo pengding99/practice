@@ -2,6 +2,7 @@ package org.peng.datascience.test
 
 import org.apache.spark.rdd.RDD
 import java.lang.Double.isNaN
+import java.util.concurrent.atomic.LongAccumulator
 
 import org.apache.spark.{SparkConf, SparkContext}
 import org.peng.datascience.{DataRow, NAStatCounter, ParseUtils}
@@ -18,8 +19,10 @@ object TestBasicStat {
     val rawFile = sc.textFile("hdfs://localhost:19000/aas/linkage")
     val noHeader = rawFile.filter(!ParseUtils.isHeader(_, "id_1"))
     val parsedData = noHeader.map(ParseUtils.parseLine(_, ","))
+    val acc = sc.longAccumulator("acc")
     val tupleData = parsedData.map(row => {
         val rowData = row.data
+        acc.add(1)
         (rowData(0).toInt, rowData(1).toInt, rowData.slice(2, 11).map(x=> if(x == "?") Double.NaN else x.toDouble), rowData(11).toBoolean)
       }
     )
@@ -37,6 +40,7 @@ object TestBasicStat {
 
     val counters = counterRDD.reduce((x, y) => x.zip(y).map(z => z._1.merge(z._2)))
     counters.foreach(println(_))
+    println("=================================", acc.value)
 
   }
 
